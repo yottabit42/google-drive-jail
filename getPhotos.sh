@@ -4,6 +4,9 @@
 # client. The user should already have Google Photos enabled in Google Drive,
 # and adjust the paths as needed.
 #
+# Also available in a convenient Google Doc:
+# https://docs.google.com/document/d/1LSr3J6hdnCDQHfiH45K3HMvEqzbug7GeUeDa_6b_Hhc
+#
 # Jacob McDonald
 # Revision 170506a-yottabit
 
