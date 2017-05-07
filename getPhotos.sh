@@ -9,6 +9,8 @@
 #
 # Jacob McDonald
 # Revision 170506a-yottabit
+#
+# Licensed under BSD-3-Clause, the Modified BSD License
 
 # Adjust your Google Drive location here
 gdriveDir="/config/gdrive"
