@@ -44,7 +44,7 @@ It’s also possible to take this methodology a couple steps further. Namely:
 
 (Side note: scripting in Bourne *sh* is much easier when one realizes it isn’t *csh*. 😐 Also, this is 1979 Bourne shell, *sh*—not that newfangled 1989 Bourne-again shell, *bash*. It *should* be compatible with *dash*, the default */bin/sh* in GNU/Linux, but ymmv as I have not tested it.)
 
-### Scenario 2: Resilio Sync for distributed synchronization of data
+### Scenario 2: odeke-em/drive for pulling Google Photos to a local datastore
 
 Create a standard FreeBSD jail. Link in the persistent configuration dataset, `/config` in this case. Run the configuration script, `install-gdrive.sh` in this case.
 
