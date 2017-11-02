@@ -11,7 +11,7 @@
 # https://docs.google.com/document/d/1LSr3J6hdnCDQHfiH45K3HMvEqzbug7GeUeDa_6b_Hhc
 #
 # Jacob McDonald
-# Revision 170506a-yottabit
+# Revision 171102a-yottabit
 #
 # Licensed under BSD-3-Clause, the Modified BSD License
 
@@ -34,16 +34,34 @@ else
   exit
 fi
 
-/usr/sbin/pkg update || exit
+/usr/sbin/pkg update
 /usr/sbin/pkg upgrade --yes || exit
 /usr/sbin/pkg install --yes go || exit
 /usr/sbin/pkg clean --yes || exit
 
 # Add golang to the user profile path
-echo "GOPATH=\$HOME/gopath" >> ~/.profile
-echo "export GOPATH" >> ~/.profile
-echo "PATH=\$GOPATH:\$GOPATH/bin:\$PATH" >> ~/.profile
-echo "export PATH" >> ~/.profile
+if grep 'GOPATH=\$HOME/gopath' ~/.profile; then
+  true
+else
+  echo "GOPATH=\$HOME/gopath" >> ~/.profile
+fi
+if grep 'export GOPATH' ~/.profile; then
+  true
+else
+  echo "export GOPATH" >> ~/.profile
+fi
+if grep 'PATH=\$GOPATH:\$GOPATH/bin:\$PATH' ~/.profile; then
+  true
+else
+  echo "PATH=\$GOPATH:\$GOPATH/bin:\$PATH" >> ~/.profile
+fi
+if grep 'export PATH' ~/.profile; then
+  true
+else
+  echo "export PATH" >> ~/.profile
+fi
+
+# Source the update env vars
 . ~/.profile
 
 # Install the odeke-em/drive client
@@ -52,7 +70,14 @@ echo "export PATH" >> ~/.profile
 # Initialize Google Drive
 drive init "$gdriveDir" || exit
 
-echo "42 11,23 * * * root \"$configDir/getPhotos.sh\" \
->> \"$configDir/getPhotos.log\" 2>&1" >> /etc/crontab
+# Add trigger to crontab
+# Default run interval is daily at 1142 and 2342, localtime
+if grep 'getPhotos.sh' /etc/crontab; then
+  echo 'getPhotos.sh already in crontab'
+else
+  echo "42 11,23 * * * root \"$configDir/getPhotos.sh\" \
+  >> \"$configDir/getPhotos.log\" 2>&1" >> /etc/crontab
+fi
 
+# Kickoff initial pull
 "$configDir/getPhotos.sh"
