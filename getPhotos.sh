@@ -8,7 +8,7 @@
 # https://docs.google.com/document/d/1LSr3J6hdnCDQHfiH45K3HMvEqzbug7GeUeDa_6b_Hhc
 #
 # Jacob McDonald
-# Revision 170506a-yottabit
+# Revision 180731a-yottabit
 #
 # Licensed under BSD-3-Clause, the Modified BSD License
 
@@ -44,3 +44,6 @@ while [ $E -ne 0 ]; do
 done
 
 echo Finished `date`
+
+echo Count: `find $gdriveDir -type f | wc -l`
+echo Size: `du -chs $gdriveDir`
